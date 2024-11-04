@@ -2,14 +2,15 @@
 
 [Setup]
 AppName=TIF PDF Generator
-AppVersion=0.02 Alpha
-DefaultDirName={pf}\TIFPDFGenerator
+AppVersion=0.05 Alpha
+DefaultDirName={commonpf}\TIFPDFGenerator
 DefaultGroupName=TIF PDF Generator
-OutputBaseFilename=tif_pdf_Generator_0.02
+OutputDir=executable
+OutputBaseFilename=tif_pdf_Generator_0.05
 Compression=lzma
 SolidCompression=yes
 DisableProgramGroupPage=yes
-ArchitecturesInstallIn64BitMode=x64
+ArchitecturesInstallIn64BitMode=x64compatible
 PrivilegesRequired=admin
 
 [Files]
@@ -20,7 +21,7 @@ Source: "dist\Pdf_generator.exe"; DestDir: "{app}"; Flags: ignoreversion
 Source: "gs\gs10040w64.exe"; DestDir: "{tmp}"; Flags: deleteafterinstall
 
 [Icons]
-Name: "{group}\TIFF PDF Converter"; Filename: "{app}\Pdf_generator.exe"
+Name: "{group}\TIFF PDF Generator"; Filename: "{app}\Pdf_generator.exe"
 Name: "{group}\Uninstall TIF PDF Generator"; Filename: "{uninstallexe}"
 
 [Run]
@@ -28,7 +29,7 @@ Name: "{group}\Uninstall TIF PDF Generator"; Filename: "{uninstallexe}"
 Filename: "{tmp}\gs10040w64.exe"; Parameters: "/S"; StatusMsg: "Installing Ghostscript..."
 
 ; Add Ghostscript to PATH
-Filename: "{cmd}"; Parameters: "/C setx /M PATH ""%PATH%;{pf}\gs\gs10.04.0\bin"""
+Filename: "{cmd}"; Parameters: "/C setx /M PATH ""%PATH%;{commonpf}\gs\gs10.04.0\bin"""
 
 ; Run the main application after installation
 Filename: "{app}\Pdf_generator.exe"; Flags: nowait postinstall skipifsilent

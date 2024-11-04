@@ -27,7 +27,7 @@ class ImageToPDFConverter(QMainWindow):
     def __init__(self):
         super().__init__()
 
-        self.setWindowTitle("Image to PDF Converter with Ghostscript")
+        self.setWindowTitle("TIFF PDF Generator")
         self.setGeometry(100, 100, 700, 650)
 
         # Central Widget
@@ -36,7 +36,7 @@ class ImageToPDFConverter(QMainWindow):
 
         # Layout
         layout = QVBoxLayout()
-        layout.setContentsMargins(5,40,5,0)
+
 
         # Button to select folder
         self.select_folder_btn = QPushButton("Select Image Folder")
@@ -195,8 +195,11 @@ class ConversionThread(QThread):
         self.resize_option = resize_option
         self.print_option = print_option
         self.custom_dpi = custom_dpi
-        self.output_pdf = self.output_folder / "output.pdf" # Output file path set automatically
-        self.resized_pdf = self.output_folder / f"{self.output_pdf.parent.name}_resized.pdf"  # Resized file path
+        if self.resize_option != "No Resize":
+            self.output_pdf = self.output_folder / "output.pdf" # Output file path set automatically
+        else:
+            self.output_pdf = self.output_folder / f"{self.output_folder.name}.pdf"
+        self.resized_pdf = self.output_folder / f"{self.output_pdf.parent.name}.pdf"  # Resized file path
 
     def run(self):
         """Performs the conversion to PDF and resizes it using Ghostscript."""
@@ -204,20 +207,19 @@ class ConversionThread(QThread):
         try:
             total_images = len(self.image_files)
 
-            # Step 1: Convert all images to a single PDF
-            with open(self.output_pdf, "wb") as f:
-                f.write(img2pdf.convert([self.output_folder / img for img in self.image_files]))
+            # # Step 1: Convert all images to a single PDF
+            # with open(self.output_pdf, "wb") as f:
+            #     f.write(img2pdf.convert([self.output_folder / img for img in self.image_files]))
 
-            total_images = len(self.image_files)
             with open(self.output_pdf, "wb") as f:
+                pdf_pages = []
                 for index, img in enumerate(self.image_files):
-                    # Convert the current image to PDF page
-                    pdf_page = img2pdf.convert(self.output_folder / img)
-                    f.write(pdf_page)
-
-                    # Update progress bar (0% to 50%)
-                    progress = int((index + 1) / total_images * 50)  # Scale to 50%
+                    pdf_pages.append(self.output_folder / img)
+                    progress = int((index + 1) / total_images * 10)  # Scale to 10%
                     self.progress_updated.emit(progress)
+
+                f.write(img2pdf.convert(pdf_pages))
+                self.progress_updated.emit(95)
 
 
             logging.info(f"Images converted to PDF: {self.output_pdf}")
@@ -238,7 +240,8 @@ class ConversionThread(QThread):
             # Emit 100% progress when done
             self.progress_updated.emit(100)
             self.conversion_finished.emit(True, str(self.resized_pdf), None)
-            self.output_pdf.unlink()
+            if self.resize_option != "No Resize":
+                self.output_pdf.unlink()
 
         except Exception as e:
             logging.error(f"Error during PDF conversion: {str(e)}")
