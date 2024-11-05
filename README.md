@@ -5,7 +5,7 @@ A windows application to convert multiple TIFF images to PDF with options to con
 
 # Installation and Usage
 
-Detailed documentation is given in [tutorial](docs/documentation.md) page.
+Detailed documentation is given in [tutorial](docs/TIF_pdf_documentation.md) page.
 
 # Steps to build from Source
 
