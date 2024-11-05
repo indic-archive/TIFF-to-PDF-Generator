@@ -4,6 +4,7 @@ A windows application to convert multiple TIFF images to PDF with options to con
 ![](docs/pics/Pictures/10000000000001B5000001F256A25F22B3BDCB04.png)
 
 # Installation and Usage
+Download the executable from latest [Release](https://github.com/indic-archive/TIFF-to-PDF-Generator/releases/tag/v0.05a) and install it directly.
 
 Detailed documentation is given in tutorial [ [Markdown](docs/TIF_pdf_documentation.md) | [PDF](docs/TIF_pdf_documentation.pdf) ] page.
 
