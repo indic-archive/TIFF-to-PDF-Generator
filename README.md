@@ -1,5 +1,5 @@
 # TIFF-to-PDF-Generator
-A windows application to convert multiple TIFF images to PDF with options to control PDF size and quality.
+A windows application to convert multiple TIFF images to PDF with options to control PDF size and quality. This tool uses [img2pdf](https://github.com/myollie/img2pdf) and [Ghostscript](https://ghostscript.readthedocs.io/en/latest/#) for the generation and conversion.
 
 ![](docs/pics/Pictures/10000000000001B5000001F256A25F22B3BDCB04.png)
 
