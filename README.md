@@ -14,7 +14,3 @@ Detailed documentation is given in tutorial [ [Markdown](docs/TIF_pdf_documentat
 3. Use pyinstaller to buld the source code to executable.
 4. Install [Inno Setup](https://jrsoftware.org/isinfo.php) and use `inno_script.iss` to build the final executable with ghost script.
 
-## Contributors
-
-- [Athul R T](https://github.com/athulvis)
-- [Akhil Krishnan S](https://github.com/akhilan)
