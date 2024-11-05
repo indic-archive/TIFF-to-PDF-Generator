@@ -2,3 +2,14 @@
 A windows application to convert multiple TIFF images to PDF with options to control PDF size and quality.
 
 ![](docs/pics/Pictures/10000000000001B5000001F256A25F22B3BDCB04.png)
+
+# Installation and Usage
+
+Detailed documentation is given in [tutorial](docs/documentation.md) page.
+
+# Steps to build from Source
+
+1. Install Python 3.12.0
+2. Install libraries from Requirements.txt
+3. Use pyinstaller to buld the source code to executable.
+4. Install [Inno Setup](https://jrsoftware.org/isinfo.php) and use `inno_script.iss` to build the final executable with ghost script.
